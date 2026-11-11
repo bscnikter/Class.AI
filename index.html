@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Класс ИИ — Школьный Помощник</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #38bdf8;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; padding: 15px; }
+    header { text-align: center; padding: 20px 0; }
+    header h1 { font-size: 2rem; color: var(--accent); }
+    header p { color: var(--muted); margin-top: 5px; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
+    .card { background: var(--card); border-radius: 12px; padding: 15px; border: 1px solid #334155; }
+    .card h3 { color: var(--accent); margin-bottom: 10px; }
+    
+    .chat-box { background: #0f172a; border-radius: 8px; padding: 10px; height: 180px; overflow-y: auto; margin-bottom: 10px; font-size: 0.9rem; }
+    .input-group { display: flex; gap: 8px; }
+    input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; }
+    button { padding: 10px 15px; background: var(--accent); border: none; border-radius: 6px; color: #0f172a; font-weight: bold; cursor: pointer; }
+    
+    ul { list-style: none; }
+    li { padding: 8px 0; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎓 КЛАСС ИИ</h1>
+    <p>Умный помощник для 6 класса</p>
+  </header>
+
+  <div class="grid">
+    <!-- Помощник по учебе -->
+    <div class="card">
+      <h3>📚 ИИ-Репетитор</h3>
+      <div class="chat-box" id="chat">
+        <div>🤖 <b>Класс ИИ:</b> Привет! Спроси меня что угодно по математике, истории или языкам!</div>
+      </div>
+      <div class="input-group">
+        <input type="text" id="userInput" placeholder="Напиши вопрос...">
+        <button onclick="sendMessage()">Спросить</button>
+      </div>
+    </div>
+
+    <!-- Расписание -->
+    <div class="card">
+      <h3>📅 Расписание Уроков</h3>
+      <ul>
+        <li><span>1. Математика</span> <span>08:30</span></li>
+        <li><span>2. Русский язык</span> <span>09:25</span></li>
+        <li><span>3. Естествознание</span> <span>10:20</span></li>
+        <li><span>4. Казахский язык</span> <span>11:15</span></li>
+        <li><span>5. Физкультура</span> <span>12:10</span></li>
+      </ul>
+    </div>
+
+    <!-- Викторина на перемене -->
+    <div class="card">
+      <h3>🎮 Викторина на перемене</h3>
+      <p id="quizQuestion" style="margin-bottom: 15px;">Вопрос: Сколько будет 12 × 12?</p>
+      <div class="input-group">
+        <input type="text" id="quizAnswer" placeholder="Твой ответ...">
+        <button onclick="checkAnswer()">Ответить</button>
+      </div>
+      <p id="quizResult" style="margin-top: 10px; font-weight: bold;"></p>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chat = document.getElementById('chat');
+      if (!input.value.trim()) return;
+
+      const userText = input.value;
+      chat.innerHTML += `<div><b>Ты:</b> ${userText}</div>`;
+      input.value = '';
+
+      setTimeout(() => {
+        chat.innerHTML += `<div>🤖 <b>Класс ИИ:</b> Отличный вопрос! Я пока учусь, но скоро смогу решать это за 1 секунду!</div>`;
+        chat.scrollTop = chat.scrollHeight;
+      }, 600);
+    }
+
+    function checkAnswer() {
+      const ans = document.getElementById('quizAnswer').value.trim();
+      const res = document.getElementById('quizResult');
+      if (ans === '144') {
+        res.style.color = '#4ade80';
+        res.innerText = 'Правильно! Ты красавчик! 🎉';
+      } else {
+        res.style.color = '#f87171';
+        res.innerText = 'Почти! Попробуй ещё раз (подсказка: 144 😉)';
+      }
+    }
+  </script>
+</body>
+  </html>
+  
